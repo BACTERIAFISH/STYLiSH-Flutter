@@ -37,6 +37,9 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  final List<String> entries = <String>['A', 'B', 'C'];
+  final List<int> colorCodes = <int>[600, 500, 100];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,28 +47,61 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Image.asset(
           'assets/stylish_logo.png',
           width: 150,
-          ),
+        ),
         backgroundColor: const Color(0xFFEEEEEE),
         elevation: 1,
       ),
-      body: Center(
+      body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            SizedBox(
+              height: 200,
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  itemCount: entries.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Container(
+                        width: 320,
+                        decoration: BoxDecoration(
+                          color: Colors.amber[colorCodes[index]],
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8)),
+                        ),
+                        child: Center(child: Text('Entry ${entries[index]}')),
+                      ),
+                    );
+                  }),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView.builder(
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    if (index == 0) {
+                      return const Center(child: Text('Women'));
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Container(
+                        height: 100,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 1),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8)),
+                        ),
+                        child: const Text('data'),
+                      ),
+                    );
+                  },
+                ),
+              ),
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
