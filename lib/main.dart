@@ -45,6 +45,8 @@ class _MyHomePageState extends State<MyHomePage> {
           'assets/stylish_logo.png',
           width: 150,
           ),
+        backgroundColor: const Color(0xFFEEEEEE),
+        elevation: 1,
       ),
       body: Center(
         child: Column(
