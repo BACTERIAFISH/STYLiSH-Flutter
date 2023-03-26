@@ -41,7 +41,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Image.asset(
+          'assets/stylish_logo.png',
+          width: 150,
+          ),
       ),
       body: Center(
         child: Column(
