@@ -62,6 +62,7 @@ flutter:
   assets:
       - assets/stylish_logo.png
       - assets/dodoro_bus.png
+      - assets/robot.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

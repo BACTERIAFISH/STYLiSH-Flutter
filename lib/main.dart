@@ -144,9 +144,18 @@ class ProductList extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Container(
+                  SizedBox(
                     width: 80,
-                    color: Colors.green,
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(8),
+                        bottomLeft: Radius.circular(8),
+                      ),
+                      child: Image.asset(
+                        'assets/robot.png',
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
                   ),
                   Expanded(
                     child: Padding(
