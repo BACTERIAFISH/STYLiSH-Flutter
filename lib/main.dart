@@ -37,9 +37,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  final List<String> entries = <String>['A', 'B', 'C'];
-  final List<int> colorCodes = <int>[600, 500, 100];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,20 +56,18 @@ class _MyHomePageState extends State<MyHomePage> {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(vertical: 8),
-                itemCount: entries.length,
+                itemCount: 8,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8),
-                    child: Container(
+                    child: SizedBox(
                       width: 320,
-                      decoration: BoxDecoration(
-                        color: Colors.amber[colorCodes[index]],
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(8),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          'assets/dodoro_bus.png',
+                          fit: BoxFit.fitWidth,
                         ),
-                      ),
-                      child: Center(
-                        child: Text('Entry ${entries[index]}'),
                       ),
                     ),
                   );
