@@ -131,7 +131,10 @@ class ProductList extends StatelessWidget {
       itemBuilder: (context, index) {
         if (index == 0) {
           return Center(
-            child: Text(title),
+            child: Text(
+              title,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
           );
         } else {
           return Padding(
@@ -157,12 +160,8 @@ class ProductList extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
-                          Text(
-                            'Uniqlo 特級極輕羽絨外套',
-                          ),
-                          Text(
-                            'NT\$ 320',
-                          ),
+                          Text('Uniqlo 特級極輕羽絨外套'),
+                          Text('NT\$ 320'),
                         ],
                       ),
                     ),
