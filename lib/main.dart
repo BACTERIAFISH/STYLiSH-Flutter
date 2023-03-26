@@ -80,56 +80,96 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    if (index == 0) {
-                      return const Center(
-                        child: Text('Women'),
-                      );
-                    } else {
-                      return Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Container(
-                          height: 100,
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 1),
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(8),
-                            ),
+              child: LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+                  if (constraints.maxWidth < 767) {
+                    return const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: ProductList(),
+                    );
+                  } else {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: const [
+                          Expanded(
+                            child: ProductList(),
                           ),
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 80,
-                                color: Colors.green,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: const [
-                                    Text('Uniqlo 特級極輕羽絨外套'),
-                                    Text('NT\$ 320'),
-                                  ],
-                                ),
-                              ),
-                            ],
+                          Expanded(
+                            child: ProductList(),
                           ),
-                        ),
-                      );
-                    }
-                  },
-                ),
+                          Expanded(
+                            child: ProductList(),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                },
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class ProductList extends StatelessWidget {
+  const ProductList({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: 10,
+      itemBuilder: (context, index) {
+        if (index == 0) {
+          return const Center(
+            child: Text('Women'),
+          );
+        } else {
+          return Padding(
+            padding: const EdgeInsets.all(8),
+            child: Container(
+              height: 100,
+              decoration: BoxDecoration(
+                border: Border.all(width: 1),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(8),
+                ),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 80,
+                    color: Colors.green,
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text(
+                            'Uniqlo 特級極輕羽絨外套',
+                          ),
+                          Text(
+                            'NT\$ 320',
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+      },
     );
   }
 }
