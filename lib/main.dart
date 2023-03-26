@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   if (constraints.maxWidth < 767) {
                     return const Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: ProductList(),
+                      child: ProductList(title: '女裝'),
                     );
                   } else {
                     return Padding(
@@ -94,13 +94,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: const [
                           Expanded(
-                            child: ProductList(),
+                            child: ProductList(title: '女裝'),
                           ),
                           Expanded(
-                            child: ProductList(),
+                            child: ProductList(title: '男裝'),
                           ),
                           Expanded(
-                            child: ProductList(),
+                            child: ProductList(title: '配件'),
                           ),
                         ],
                       ),
@@ -117,8 +117,11 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class ProductList extends StatelessWidget {
+  final String title;
+
   const ProductList({
     super.key,
+    required this.title,
   });
 
   @override
@@ -127,8 +130,8 @@ class ProductList extends StatelessWidget {
       itemCount: 10,
       itemBuilder: (context, index) {
         if (index == 0) {
-          return const Center(
-            child: Text('Women'),
+          return Center(
+            child: Text(title),
           );
         } else {
           return Padding(
