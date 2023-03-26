@@ -57,23 +57,27 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               height: 200,
               child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  itemCount: entries.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Container(
-                        width: 320,
-                        decoration: BoxDecoration(
-                          color: Colors.amber[colorCodes[index]],
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(8)),
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                itemCount: entries.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Container(
+                      width: 320,
+                      decoration: BoxDecoration(
+                        color: Colors.amber[colorCodes[index]],
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(8),
                         ),
-                        child: Center(child: Text('Entry ${entries[index]}')),
                       ),
-                    );
-                  }),
+                      child: Center(
+                        child: Text('Entry ${entries[index]}'),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
             Expanded(
               child: Padding(
@@ -82,20 +86,43 @@ class _MyHomePageState extends State<MyHomePage> {
                   itemCount: 10,
                   itemBuilder: (context, index) {
                     if (index == 0) {
-                      return const Center(child: Text('Women'));
-                    }
-                    return Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Container(
-                        height: 100,
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 1),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(8)),
+                      return const Center(
+                        child: Text('Women'),
+                      );
+                    } else {
+                      return Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Container(
+                          height: 100,
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 1),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(8),
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 80,
+                                color: Colors.green,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const [
+                                    Text('Uniqlo 特級極輕羽絨外套'),
+                                    Text('NT\$ 320'),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        child: const Text('data'),
-                      ),
-                    );
+                      );
+                    }
                   },
                 ),
               ),
