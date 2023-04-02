@@ -30,10 +30,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<String> categories = ['女裝', '男裝', '配件'];
+  List<bool> visibilities = [true, true, true];
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
@@ -80,13 +80,27 @@ class _MyHomePageState extends State<MyHomePage> {
                         itemBuilder: (context, index) {
                           return Column(
                             children: [
-                              Text(
-                                categories[index],
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    if (visibilities[index]) {
+                                      visibilities[index] = false;
+                                    } else {
+                                      visibilities[index] = true;
+                                    }
+                                  });
+                                },
+                                child: Text(
+                                  categories[index],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
-                              const ProductList(
-                                isScrollable: false,
+                              Visibility(
+                                visible: visibilities[index],
+                                child: const ProductList(
+                                  isScrollable: false,
+                                ),
                               ),
                             ],
                           );
