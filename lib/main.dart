@@ -29,21 +29,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  final List<String> categories = ['女裝', '男裝', '配件'];
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
           'assets/stylish_logo.png',
-          width: 150,
+          width: 128,
         ),
         backgroundColor: const Color(0xFFEEEEEE),
         elevation: 1,
@@ -78,24 +73,79 @@ class _MyHomePageState extends State<MyHomePage> {
               child: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   if (constraints.maxWidth < 767) {
-                    return const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: ProductList(title: '女裝'),
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListView.builder(
+                        itemCount: categories.length,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              Text(
+                                categories[index],
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              const ProductList(
+                                isScrollable: false,
+                              ),
+                            ],
+                          );
+                        },
+                      ),
                     );
                   } else {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: const [
+                        children: [
                           Expanded(
-                            child: ProductList(title: '女裝'),
+                            child: Column(
+                              children: [
+                                Text(
+                                  categories[0],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const Expanded(
+                                  child: ProductList(
+                                    isScrollable: true,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                           Expanded(
-                            child: ProductList(title: '男裝'),
+                            child: Column(
+                              children: [
+                                Text(
+                                  categories[1],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const Expanded(
+                                  child: ProductList(
+                                    isScrollable: true,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                           Expanded(
-                            child: ProductList(title: '配件'),
+                            child: Column(
+                              children: [
+                                Text(
+                                  categories[2],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const Expanded(
+                                  child: ProductList(
+                                    isScrollable: true,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -112,69 +162,64 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class ProductList extends StatelessWidget {
-  final String title;
+  final bool isScrollable;
 
   const ProductList({
     super.key,
-    required this.title,
+    required this.isScrollable,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      shrinkWrap: !isScrollable,
+      physics: isScrollable
+          ? const AlwaysScrollableScrollPhysics()
+          : const ClampingScrollPhysics(),
       itemCount: 10,
       itemBuilder: (context, index) {
-        if (index == 0) {
-          return Center(
-            child: Text(
-              title,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+        return Padding(
+          padding: const EdgeInsets.all(8),
+          child: Container(
+            height: 100,
+            decoration: BoxDecoration(
+              border: Border.all(width: 1),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(8),
+              ),
             ),
-          );
-        } else {
-          return Padding(
-            padding: const EdgeInsets.all(8),
-            child: Container(
-              height: 100,
-              decoration: BoxDecoration(
-                border: Border.all(width: 1),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(8),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 80,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(8),
+                      bottomLeft: Radius.circular(8),
+                    ),
+                    child: Image.asset(
+                      'assets/robot.png',
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
                 ),
-              ),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 80,
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(8),
-                        bottomLeft: Radius.circular(8),
-                      ),
-                      child: Image.asset(
-                        'assets/robot.png',
-                        fit: BoxFit.fitWidth,
-                      ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text('Uniqlo 特級極輕羽絨外套'),
+                        Text('NT\$ 320'),
+                      ],
                     ),
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text('Uniqlo 特級極輕羽絨外套'),
-                          Text('NT\$ 320'),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          );
-        }
+          ),
+        );
       },
     );
   }
