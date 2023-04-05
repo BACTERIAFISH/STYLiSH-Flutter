@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -267,7 +269,186 @@ class _DetailPageState extends State<DetailPage> {
         elevation: 1,
         automaticallyImplyLeading: false,
       ),
-      body: Center(child: Text('TEST')),
+      body: ListView.builder(
+        itemCount: 1,
+        itemBuilder: ((context, index) {
+          return Column(
+            children: [
+              Container(
+                width: 360,
+                height: 500,
+                padding: const EdgeInsets.only(top: 32),
+                child: Image.asset(
+                  'assets/robot.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Container(
+                width: 360,
+                padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('UNIQLO 特級極輕羽絨外套'),
+                    const Text('2023032101'),
+                    const Text('NT\$ 323'),
+                    const Divider(
+                      thickness: 1,
+                      color: Colors.grey,
+                    ),
+                    Container(
+                      height: 20,
+                      margin: const EdgeInsets.only(top: 8, bottom: 8),
+                      child: Row(
+                        children: [
+                          const Text('顏色'),
+                          const VerticalDivider(
+                            thickness: 1,
+                            color: Colors.grey,
+                          ),
+                          Expanded(
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 2,
+                              itemBuilder: ((context, index) {
+                                return Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, right: 8),
+                                  child: GestureDetector(
+                                    child: Container(
+                                      color: Colors.green,
+                                      width: 20,
+                                      height: 20,
+                                    ),
+                                    onTap: () {
+                                      print('color: $index');
+                                    },
+                                  ),
+                                );
+                              }),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 30,
+                      margin: const EdgeInsets.only(top: 8, bottom: 8),
+                      child: Row(
+                        children: [
+                          const Text('尺寸'),
+                          const SizedBox(
+                            height: 20,
+                            child: VerticalDivider(
+                              thickness: 1,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          Expanded(
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 3,
+                              itemBuilder: ((context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(left: 8),
+                                  child: ChoiceChip(
+                                    label: Text('S'),
+                                    selected: false,
+                                    onSelected: (value) {
+                                      print('size $index');
+                                    },
+                                  ),
+                                );
+                              }),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 40,
+                      margin: const EdgeInsets.only(top: 8, bottom: 8),
+                      child: Row(
+                        children: [
+                          Text('數量'),
+                          SizedBox(
+                            height: 20,
+                            child: VerticalDivider(
+                              thickness: 1,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Flexible(
+                                  child: IconButton(
+                                    onPressed: () {
+                                      print('minus');
+                                    },
+                                    icon: const Icon(Icons.remove_circle),
+                                  ),
+                                ),
+                                Flexible(
+                                  flex: 2,
+                                  child: TextField(
+                                    controller:
+                                        TextEditingController(text: '0'),
+                                    decoration: const InputDecoration(
+                                      border: InputBorder.none,
+                                      contentPadding:
+                                          EdgeInsets.only(bottom: 20),
+                                    ),
+                                    keyboardType: TextInputType.number,
+                                    textAlign: TextAlign.center,
+                                    textAlignVertical: TextAlignVertical.center,
+                                    autocorrect: false,
+                                  ),
+                                ),
+                                Flexible(
+                                  child: IconButton(
+                                    onPressed: () {
+                                      print('plus');
+                                    },
+                                    icon: const Icon(Icons.add_circle),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8, bottom: 8),
+                      child: ElevatedButton(
+                        style: FilledButton.styleFrom(
+                          backgroundColor: Color(0xFF3F3A3A),
+                          elevation: 2,
+                          minimumSize: Size(double.infinity, 60),
+                          shape: RoundedRectangleBorder(),
+                        ),
+                        onPressed: () {},
+                        child: const Text(
+                          '請選擇尺寸',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    ),
+                    const Text('實品顏色依單品照為主'),
+                    const Text('棉 100%'),
+                    const Text('厚薄：薄'),
+                    const Text('彈性：無'),
+                    const Text('素材產地 / 日本'),
+                    const Text('加工產地 / 中國'),
+                  ],
+                ),
+              )
+            ],
+          );
+        }),
+      ),
     );
   }
 }
