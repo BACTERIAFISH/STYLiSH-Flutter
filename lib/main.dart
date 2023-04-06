@@ -272,12 +272,13 @@ class _DetailPageState extends State<DetailPage> {
       body: ListView.builder(
         itemCount: 1,
         itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 32),
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                if (constraints.maxWidth < 767) {
-                  return Column(
+          return LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth < 767) {
+                return Container(
+                  width: 360,
+                  padding: const EdgeInsets.only(top: 32),
+                  child: Column(
                     children: [
                       SizedBox(
                         width: 360,
@@ -291,100 +292,130 @@ class _DetailPageState extends State<DetailPage> {
                         margin: const EdgeInsets.only(top: 16),
                         child: ProductDetail(),
                       ),
-                      Container(
-                        width: 360,
-                        padding:
-                            const EdgeInsets.only(left: 16, top: 16, right: 16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.only(right: 16),
-                                  child: ShaderMask(
-                                    blendMode: BlendMode.srcIn,
-                                    shaderCallback: (bounds) {
-                                      return const LinearGradient(
-                                        colors: [
-                                          Color(0xFF4B39EF),
-                                          Color(0xFF39D2C0),
-                                        ],
-                                      ).createShader(bounds);
-                                    },
-                                    child: const Text('細部說明'),
-                                  ),
-                                ),
-                                const Expanded(
-                                  child: Divider(
-                                    thickness: 1,
-                                    color: Colors.grey,
-                                  ),
-                                )
-                              ],
-                            ),
-                            const Text(
-                              'O.N.S is all about options, which is why we took our staple polo shirt and upgraded it with slubby linen jersey, making it even lighter for those who prefer their summer style extra-breezy.',
-                              style: TextStyle(fontSize: 12),
-                            ),
-                            Container(
-                              height: 180,
-                              margin: const EdgeInsets.only(top: 16),
-                              child: Image.asset(
-                                'assets/dodoro_bus.png',
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Container(
-                              height: 180,
-                              margin: const EdgeInsets.only(top: 16),
-                              child: Image.asset(
-                                'assets/dodoro_bus.png',
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Container(
-                              height: 180,
-                              margin: const EdgeInsets.only(top: 16),
-                              child: Image.asset(
-                                'assets/dodoro_bus.png',
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Container(
-                              height: 180,
-                              margin: const EdgeInsets.only(top: 16),
-                              child: Image.asset(
-                                'assets/dodoro_bus.png',
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ],
-                        ),
+                      ProductDescription(
+                        width: 344,
                       )
                     ],
-                  );
-                } else {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+                );
+              } else {
+                return Container(
+                  padding: const EdgeInsets.only(top: 32),
+                  child: Column(
                     children: [
-                      SizedBox(
-                        width: 360,
-                        height: 500,
-                        child: Image.asset(
-                          'assets/robot.png',
-                          fit: BoxFit.cover,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 360,
+                            height: 500,
+                            child: Image.asset(
+                              'assets/robot.png',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          ProductDetail(),
+                        ],
                       ),
-                      ProductDetail(),
+                      ProductDescription(
+                        width: 736,
+                      ),
                     ],
-                  );
-                }
-              },
-            ),
+                  ),
+                );
+              }
+            },
           );
         },
+      ),
+    );
+  }
+}
+
+class ProductDescription extends StatefulWidget {
+  final double width;
+
+  const ProductDescription({
+    super.key,
+    required this.width,
+  });
+
+  @override
+  State<ProductDescription> createState() => _ProductDescriptionState();
+}
+
+class _ProductDescriptionState extends State<ProductDescription> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: widget.width,
+      margin: const EdgeInsets.only(left: 16, top: 16, right: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(right: 16),
+                child: ShaderMask(
+                  blendMode: BlendMode.srcIn,
+                  shaderCallback: (bounds) {
+                    return const LinearGradient(
+                      colors: [
+                        Color(0xFF4B39EF),
+                        Color(0xFF39D2C0),
+                      ],
+                    ).createShader(bounds);
+                  },
+                  child: const Text('細部說明'),
+                ),
+              ),
+              const Expanded(
+                child: Divider(
+                  thickness: 1,
+                  color: Colors.grey,
+                ),
+              )
+            ],
+          ),
+          const Text(
+            'O.N.S is all about options, which is why we took our staple polo shirt and upgraded it with slubby linen jersey, making it even lighter for those who prefer their summer style extra-breezy.',
+            style: TextStyle(fontSize: 12),
+          ),
+          Container(
+            height: 180,
+            margin: const EdgeInsets.only(top: 16),
+            child: Image.asset(
+              'assets/dodoro_bus.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Container(
+            height: 180,
+            margin: const EdgeInsets.only(top: 16),
+            child: Image.asset(
+              'assets/dodoro_bus.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Container(
+            height: 180,
+            margin: const EdgeInsets.only(top: 16),
+            child: Image.asset(
+              'assets/dodoro_bus.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+          Container(
+            height: 180,
+            margin: const EdgeInsets.only(top: 16),
+            child: Image.asset(
+              'assets/dodoro_bus.png',
+              fit: BoxFit.cover,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -403,8 +434,8 @@ class _ProductDetailState extends State<ProductDetail> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 360,
-      padding: const EdgeInsets.only(left: 16, right: 16),
+      width: 344,
+      margin: const EdgeInsets.only(left: 16, right: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
