@@ -446,6 +446,8 @@ class ProductDetail extends StatefulWidget {
 }
 
 class _ProductDetailState extends State<ProductDetail> {
+  int amount = 1;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -590,7 +592,11 @@ class _ProductDetailState extends State<ProductDetail> {
                       Flexible(
                         child: IconButton(
                           onPressed: () {
-                            print('minus');
+                            setState(() {
+                              if (amount > 1) {
+                                amount -= 1;
+                              }
+                            });
                           },
                           icon: const Icon(Icons.remove_circle),
                         ),
@@ -598,7 +604,7 @@ class _ProductDetailState extends State<ProductDetail> {
                       Flexible(
                         flex: 2,
                         child: TextField(
-                          controller: TextEditingController(text: '1'),
+                          controller: TextEditingController(text: '$amount'),
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.only(bottom: 20),
@@ -612,7 +618,9 @@ class _ProductDetailState extends State<ProductDetail> {
                       Flexible(
                         child: IconButton(
                           onPressed: () {
-                            print('plus');
+                            setState(() {
+                              amount += 1;
+                            });
                           },
                           icon: const Icon(Icons.add_circle),
                         ),
