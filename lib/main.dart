@@ -384,35 +384,43 @@ class _ProductDescriptionState extends State<ProductDescription> {
             style: TextStyle(fontSize: 12),
           ),
           Container(
-            height: 180,
             margin: const EdgeInsets.only(top: 16),
-            child: Image.asset(
-              'assets/dodoro_bus.png',
-              fit: BoxFit.cover,
+            child: AspectRatio(
+              aspectRatio: 2,
+              child: Image.asset(
+                'assets/dodoro_bus.png',
+                fit: BoxFit.fill,
+              ),
             ),
           ),
           Container(
-            height: 180,
             margin: const EdgeInsets.only(top: 16),
-            child: Image.asset(
-              'assets/dodoro_bus.png',
-              fit: BoxFit.cover,
+            child: AspectRatio(
+              aspectRatio: 2,
+              child: Image.asset(
+                'assets/dodoro_bus.png',
+                fit: BoxFit.fill,
+              ),
             ),
           ),
           Container(
-            height: 180,
             margin: const EdgeInsets.only(top: 16),
-            child: Image.asset(
-              'assets/dodoro_bus.png',
-              fit: BoxFit.cover,
+            child: AspectRatio(
+              aspectRatio: 2,
+              child: Image.asset(
+                'assets/dodoro_bus.png',
+                fit: BoxFit.fill,
+              ),
             ),
           ),
           Container(
-            height: 180,
             margin: const EdgeInsets.only(top: 16),
-            child: Image.asset(
-              'assets/dodoro_bus.png',
-              fit: BoxFit.cover,
+            child: AspectRatio(
+              aspectRatio: 2,
+              child: Image.asset(
+                'assets/dodoro_bus.png',
+                fit: BoxFit.fill,
+              ),
             ),
           ),
         ],
