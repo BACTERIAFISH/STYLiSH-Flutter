@@ -10,9 +10,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'STYLiSH',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        fontFamily: 'NotoSansTC',
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -366,7 +366,13 @@ class _ProductDescriptionState extends State<ProductDescription> {
                       ],
                     ).createShader(bounds);
                   },
-                  child: const Text('細部說明'),
+                  child: const Text(
+                    '細部說明',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: 'NotoSansTC',
+                    ),
+                  ),
                 ),
               ),
               const Expanded(
@@ -379,7 +385,10 @@ class _ProductDescriptionState extends State<ProductDescription> {
           ),
           const Text(
             'O.N.S is all about options, which is why we took our staple polo shirt and upgraded it with slubby linen jersey, making it even lighter for those who prefer their summer style extra-breezy.',
-            style: TextStyle(fontSize: 12),
+            style: TextStyle(
+              fontSize: 12,
+              fontFamily: 'NotoSansTC',
+            ),
           ),
           Container(
             margin: const EdgeInsets.only(top: 16),
@@ -387,7 +396,7 @@ class _ProductDescriptionState extends State<ProductDescription> {
               aspectRatio: 2,
               child: Image.asset(
                 'assets/dodoro_bus.png',
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -397,7 +406,7 @@ class _ProductDescriptionState extends State<ProductDescription> {
               aspectRatio: 2,
               child: Image.asset(
                 'assets/dodoro_bus.png',
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -407,7 +416,7 @@ class _ProductDescriptionState extends State<ProductDescription> {
               aspectRatio: 2,
               child: Image.asset(
                 'assets/dodoro_bus.png',
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -417,7 +426,7 @@ class _ProductDescriptionState extends State<ProductDescription> {
               aspectRatio: 2,
               child: Image.asset(
                 'assets/dodoro_bus.png',
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -445,9 +454,32 @@ class _ProductDetailState extends State<ProductDetail> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('UNIQLO 特級極輕羽絨外套'),
-          const Text('2023032101'),
-          const Text('NT\$ 323'),
+          const Text(
+            'UNIQLO 特級極輕羽絨外套',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'NotoSansTC',
+            ),
+          ),
+          const Text(
+            '2023032101',
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'NotoSansTC',
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 16),
+            child: const Text(
+              'NT\$ 323',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'NotoSansTC',
+              ),
+            ),
+          ),
           const Divider(
             thickness: 1,
             color: Colors.grey,
@@ -457,7 +489,13 @@ class _ProductDetailState extends State<ProductDetail> {
             margin: const EdgeInsets.only(top: 8, bottom: 8),
             child: Row(
               children: [
-                const Text('顏色'),
+                const Text(
+                  '顏色',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'NotoSansTC',
+                  ),
+                ),
                 const VerticalDivider(
                   thickness: 1,
                   color: Colors.grey,
@@ -491,7 +529,13 @@ class _ProductDetailState extends State<ProductDetail> {
             margin: const EdgeInsets.only(top: 8, bottom: 8),
             child: Row(
               children: [
-                const Text('尺寸'),
+                const Text(
+                  '尺寸',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'NotoSansTC',
+                  ),
+                ),
                 const SizedBox(
                   height: 20,
                   child: VerticalDivider(
@@ -525,7 +569,13 @@ class _ProductDetailState extends State<ProductDetail> {
             margin: const EdgeInsets.only(top: 8, bottom: 8),
             child: Row(
               children: [
-                Text('數量'),
+                Text(
+                  '數量',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'NotoSansTC',
+                  ),
+                ),
                 SizedBox(
                   height: 20,
                   child: VerticalDivider(
@@ -589,12 +639,48 @@ class _ProductDetailState extends State<ProductDetail> {
               ),
             ),
           ),
-          const Text('實品顏色依單品照為主'),
-          const Text('棉 100%'),
-          const Text('厚薄：薄'),
-          const Text('彈性：無'),
-          const Text('素材產地 / 日本'),
-          const Text('加工產地 / 中國'),
+          const Text(
+            '實品顏色依單品照為主',
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'NotoSansTC',
+            ),
+          ),
+          const Text(
+            '棉 100%',
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'NotoSansTC',
+            ),
+          ),
+          const Text(
+            '厚薄：薄',
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'NotoSansTC',
+            ),
+          ),
+          const Text(
+            '彈性：無',
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'NotoSansTC',
+            ),
+          ),
+          const Text(
+            '素材產地 / 日本',
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'NotoSansTC',
+            ),
+          ),
+          const Text(
+            '加工產地 / 中國',
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'NotoSansTC',
+            ),
+          ),
         ],
       ),
     );
