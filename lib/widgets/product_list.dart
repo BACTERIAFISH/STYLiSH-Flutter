@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 
 import '../pages/detail_page.dart';
+import '../models/product_model.dart';
 
 class ProductList extends StatelessWidget {
-  final bool isScrollable;
+  final List<Product> _products;
+  final bool _isScrollable;
 
   const ProductList({
     super.key,
-    required this.isScrollable,
-  });
+    required List<Product> products,
+    required bool isScrollable,
+  })  : _products = products,
+        _isScrollable = isScrollable;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      shrinkWrap: !isScrollable,
-      physics: isScrollable
+      shrinkWrap: !_isScrollable,
+      physics: _isScrollable
           ? const AlwaysScrollableScrollPhysics()
           : const ClampingScrollPhysics(),
-      itemCount: 10,
+      itemCount: _products.length,
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
@@ -57,9 +61,9 @@ class ProductList extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text('Uniqlo 特級極輕羽絨外套'),
-                          Text('NT\$ 320'),
+                        children: [
+                          Text(_products[index].title),
+                          Text('NT\$ ${_products[index].price}'),
                         ],
                       ),
                     ),
