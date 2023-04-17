@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                                     builder: (context, state) {
                                       return ProductList(
                                         products: state is ProductEventSuccess
-                                            ? state.data.data
+                                            ? state.allProductData[index].data
                                             : [],
                                         isScrollable: false,
                                       );
@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                                       builder: (context, state) {
                                         return ProductList(
                                           products: state is ProductEventSuccess
-                                              ? state.data.data
+                                              ? state.allProductData[0].data
                                               : [],
                                           isScrollable: false,
                                         );
@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                                       builder: (context, state) {
                                         return ProductList(
                                           products: state is ProductEventSuccess
-                                              ? state.data.data
+                                              ? state.allProductData[1].data
                                               : [],
                                           isScrollable: false,
                                         );
@@ -176,7 +176,7 @@ class _HomePageState extends State<HomePage> {
                                       builder: (context, state) {
                                         return ProductList(
                                           products: state is ProductEventSuccess
-                                              ? state.data.data
+                                              ? state.allProductData[2].data
                                               : [],
                                           isScrollable: false,
                                         );
