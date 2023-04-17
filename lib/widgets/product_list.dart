@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '../pages/detail_page.dart';
 import '../models/product_model.dart';
@@ -49,8 +50,14 @@ class ProductList extends StatelessWidget {
                         topLeft: Radius.circular(8),
                         bottomLeft: Radius.circular(8),
                       ),
-                      child: Image.asset(
-                        'assets/robot.png',
+                      child: CachedNetworkImage(
+                        imageUrl: _products[index].mainImage,
+                        placeholder: (context, url) {
+                          return Image.asset(
+                            'assets/robot.png',
+                            fit: BoxFit.fitWidth,
+                          );
+                        },
                         fit: BoxFit.fitWidth,
                       ),
                     ),
