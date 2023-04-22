@@ -9,6 +9,7 @@ import Flutter
     ) -> Bool {
         
         let controller: FlutterViewController = window?.rootViewController as! FlutterViewController
+        
         let batteryChannel = FlutterMethodChannel(
             name: "samples.flutter.dev/battery",
             binaryMessenger: controller.binaryMessenger
@@ -21,6 +22,13 @@ import Flutter
             }
             self?.receiveBatteryLevel(result: result)
         })
+        
+        let testStringChannel = FlutterMethodChannel(name: "stylish/test", binaryMessenger: controller.binaryMessenger)
+        testStringChannel.setMethodCallHandler { [weak self] (call, result) -> Void in
+            if call.method == "getTestString" {
+                result("Test String")
+            }
+        }
         
         GeneratedPluginRegistrant.register(with: self)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)

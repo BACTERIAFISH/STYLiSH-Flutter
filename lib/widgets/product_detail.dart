@@ -17,10 +17,12 @@ class ProductDetail extends StatefulWidget {
 
 class _ProductDetailState extends State<ProductDetail> {
   static const platform = MethodChannel('samples.flutter.dev/battery');
+  static const platformTest = MethodChannel('stylish/test');
 
   int amount = 1;
   // Get battery level.
   String _batteryLevel = 'Unknown battery level.';
+  String _testString = '';
 
   Future<void> _getBatteryLevel() async {
     String batteryLevel;
@@ -33,6 +35,19 @@ class _ProductDetailState extends State<ProductDetail> {
 
     setState(() {
       _batteryLevel = batteryLevel;
+    });
+  }
+
+  Future<void> _getTestString() async {
+    String testString;
+    try {
+      testString = await platformTest.invokeMethod('getTestString');
+    } on PlatformException catch (e) {
+      testString = e.message ?? '';
+    }
+
+    setState(() {
+      _testString = testString;
     });
   }
 
@@ -232,10 +247,11 @@ class _ProductDetailState extends State<ProductDetail> {
               ),
               onPressed: () {
                 print('send platform channel');
-                _getBatteryLevel();
+                _getTestString();
+                // _getBatteryLevel();
               },
               child: Text(
-                _batteryLevel,
+                _testString,
                 style: TextStyle(fontSize: 20),
               ),
             ),
