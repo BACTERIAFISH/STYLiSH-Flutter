@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:stylish/models/product_model.dart';
 
 class ProductDetail extends StatefulWidget {
   const ProductDetail({
     super.key,
-  });
+    required Product product,
+  }) : _product = product;
+
+  final Product _product;
 
   @override
   State<ProductDetail> createState() => _ProductDetailState();
@@ -20,26 +24,26 @@ class _ProductDetailState extends State<ProductDetail> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'UNIQLO 特級極輕羽絨外套',
-            style: TextStyle(
+          Text(
+            widget._product.title,
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w500,
               fontFamily: 'NotoSansTC',
             ),
           ),
-          const Text(
-            '2023032101',
-            style: TextStyle(
+          Text(
+            '${widget._product.id}',
+            style: const TextStyle(
               fontSize: 16,
               fontFamily: 'NotoSansTC',
             ),
           ),
           Container(
             margin: const EdgeInsets.only(top: 16),
-            child: const Text(
-              'NT\$ 323',
-              style: TextStyle(
+            child: Text(
+              'NT\$ ${widget._product.price}',
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
                 fontFamily: 'NotoSansTC',
@@ -69,13 +73,15 @@ class _ProductDetailState extends State<ProductDetail> {
                 Expanded(
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 2,
+                    itemCount: widget._product.colors.length,
                     itemBuilder: ((context, index) {
                       return Padding(
                         padding: const EdgeInsets.only(left: 8, right: 8),
                         child: GestureDetector(
                           child: Container(
-                            color: Colors.green,
+                            color: Color(int.parse(
+                                'FF${widget._product.colors[index].code}',
+                                radix: 16)),
                             width: 20,
                             height: 20,
                           ),
@@ -112,12 +118,12 @@ class _ProductDetailState extends State<ProductDetail> {
                 Expanded(
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 3,
+                    itemCount: widget._product.sizes.length,
                     itemBuilder: ((context, index) {
                       return Padding(
                         padding: const EdgeInsets.only(left: 8),
                         child: ChoiceChip(
-                          label: Text('S'),
+                          label: Text(widget._product.sizes[index]),
                           selected: false,
                           onSelected: (value) {
                             print('size $index');
@@ -135,14 +141,14 @@ class _ProductDetailState extends State<ProductDetail> {
             margin: const EdgeInsets.only(top: 8, bottom: 8),
             child: Row(
               children: [
-                Text(
+                const Text(
                   '數量',
                   style: TextStyle(
                     fontSize: 16,
                     fontFamily: 'NotoSansTC',
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                   child: VerticalDivider(
                     thickness: 1,
@@ -211,44 +217,44 @@ class _ProductDetailState extends State<ProductDetail> {
               ),
             ),
           ),
-          const Text(
-            '實品顏色依單品照為主',
-            style: TextStyle(
+          Text(
+            widget._product.note,
+            style: const TextStyle(
               fontSize: 16,
               fontFamily: 'NotoSansTC',
             ),
           ),
-          const Text(
-            '棉 100%',
-            style: TextStyle(
+          Text(
+            widget._product.texture,
+            style: const TextStyle(
               fontSize: 16,
               fontFamily: 'NotoSansTC',
             ),
           ),
-          const Text(
-            '厚薄：薄',
-            style: TextStyle(
+          Text(
+            widget._product.wash,
+            style: const TextStyle(
               fontSize: 16,
               fontFamily: 'NotoSansTC',
             ),
           ),
-          const Text(
-            '彈性：無',
-            style: TextStyle(
+          Text(
+            widget._product.description,
+            style: const TextStyle(
               fontSize: 16,
               fontFamily: 'NotoSansTC',
             ),
           ),
-          const Text(
-            '素材產地 / 日本',
-            style: TextStyle(
+          Text(
+            '素材產地 / ${widget._product.place}',
+            style: const TextStyle(
               fontSize: 16,
               fontFamily: 'NotoSansTC',
             ),
           ),
-          const Text(
-            '加工產地 / 中國',
-            style: TextStyle(
+          Text(
+            '加工產地 / ${widget._product.place}',
+            style: const TextStyle(
               fontSize: 16,
               fontFamily: 'NotoSansTC',
             ),

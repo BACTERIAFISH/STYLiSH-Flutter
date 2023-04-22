@@ -29,7 +29,7 @@ class Product {
   final String place;
   final String note;
   final String story;
-  final List<Color> colors;
+  final List<ProductColor> colors;
   final List<String> sizes;
   final List<Variant> variants;
   final String mainImage;
@@ -54,8 +54,8 @@ class Product {
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
-    final List<Color> colors =
-        List.from(json['colors']).map((e) => Color.fromJson(e)).toList();
+    final List<ProductColor> colors =
+        List.from(json['colors']).map((e) => ProductColor.fromJson(e)).toList();
     final List<Variant> variants =
         List.from(json['variants']).map((e) => Variant.fromJson(e)).toList();
 
@@ -99,13 +99,13 @@ class Product {
   }
 }
 
-class Color {
+class ProductColor {
   final String code;
   final String name;
 
-  Color(this.code, this.name);
+  ProductColor(this.code, this.name);
 
-  Color.fromJson(Map<String, dynamic> json)
+  ProductColor.fromJson(Map<String, dynamic> json)
       : code = json['code'],
         name = json['name'];
 

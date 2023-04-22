@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
+import '../models/product_model.dart';
 
 class ProductDescription extends StatefulWidget {
-  final double width;
-
   const ProductDescription({
     super.key,
-    required this.width,
-  });
+    required Product product,
+    required double width,
+  })  : _product = product,
+        _width = width;
+
+  final Product _product;
+  final double _width;
 
   @override
   State<ProductDescription> createState() => _ProductDescriptionState();
@@ -16,7 +22,7 @@ class _ProductDescriptionState extends State<ProductDescription> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.width,
+      width: widget._width,
       margin: const EdgeInsets.only(left: 16, top: 16, right: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -52,53 +58,31 @@ class _ProductDescriptionState extends State<ProductDescription> {
               )
             ],
           ),
-          const Text(
-            'O.N.S is all about options, which is why we took our staple polo shirt and upgraded it with slubby linen jersey, making it even lighter for those who prefer their summer style extra-breezy.',
-            style: TextStyle(
+          Text(
+            widget._product.story,
+            style: const TextStyle(
               fontSize: 12,
               fontFamily: 'NotoSansTC',
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 16),
-            child: AspectRatio(
-              aspectRatio: 2,
-              child: Image.asset(
-                'assets/dodoro_bus.png',
-                fit: BoxFit.cover,
+          ...widget._product.images.map((image) {
+            return Container(
+              margin: const EdgeInsets.only(top: 16),
+              child: AspectRatio(
+                aspectRatio: 2,
+                child: CachedNetworkImage(
+                  imageUrl: image,
+                  placeholder: (context, url) {
+                    return Image.asset(
+                      'assets/dodoro_bus.png',
+                      fit: BoxFit.cover,
+                    );
+                  },
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 16),
-            child: AspectRatio(
-              aspectRatio: 2,
-              child: Image.asset(
-                'assets/dodoro_bus.png',
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 16),
-            child: AspectRatio(
-              aspectRatio: 2,
-              child: Image.asset(
-                'assets/dodoro_bus.png',
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 16),
-            child: AspectRatio(
-              aspectRatio: 2,
-              child: Image.asset(
-                'assets/dodoro_bus.png',
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+            );
+          }),
         ],
       ),
     );

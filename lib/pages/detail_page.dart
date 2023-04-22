@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '../widgets/product_detail.dart';
 import '../widgets/product_description.dart';
+import '../models/product_model.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({super.key});
+  const DetailPage({
+    super.key,
+    required Product product,
+  }) : _product = product;
+
+  final Product _product;
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -37,16 +44,25 @@ class _DetailPageState extends State<DetailPage> {
                       SizedBox(
                         width: 360,
                         height: 500,
-                        child: Image.asset(
-                          'assets/robot.png',
+                        child: CachedNetworkImage(
+                          imageUrl: widget._product.mainImage,
+                          placeholder: (context, url) {
+                            return Image.asset(
+                              'assets/robot.png',
+                              fit: BoxFit.cover,
+                            );
+                          },
                           fit: BoxFit.cover,
                         ),
                       ),
                       Container(
                         margin: const EdgeInsets.only(top: 16),
-                        child: ProductDetail(),
+                        child: ProductDetail(
+                          product: widget._product,
+                        ),
                       ),
                       ProductDescription(
+                        product: widget._product,
                         width: 344,
                       )
                     ],
@@ -64,15 +80,24 @@ class _DetailPageState extends State<DetailPage> {
                           SizedBox(
                             width: 360,
                             height: 500,
-                            child: Image.asset(
-                              'assets/robot.png',
+                            child: CachedNetworkImage(
+                              imageUrl: widget._product.mainImage,
+                              placeholder: (context, url) {
+                                return Image.asset(
+                                  'assets/robot.png',
+                                  fit: BoxFit.cover,
+                                );
+                              },
                               fit: BoxFit.cover,
                             ),
                           ),
-                          ProductDetail(),
+                          ProductDetail(
+                            product: widget._product,
+                          ),
                         ],
                       ),
                       ProductDescription(
+                        product: widget._product,
                         width: 736,
                       ),
                     ],
