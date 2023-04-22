@@ -1,3 +1,4 @@
 {
-    "dart.flutterWebRenderer": "html"
+    "dart.flutterWebRenderer": "html",
+    "dart.flutterAdditionalArgs": ["--no-sound-null-safety"]
 }
