@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:stylish/models/product_model.dart';
+import 'package:flutter/services.dart';
+
+import '../models/product_model.dart';
 
 class ProductDetail extends StatefulWidget {
   const ProductDetail({
@@ -14,7 +16,25 @@ class ProductDetail extends StatefulWidget {
 }
 
 class _ProductDetailState extends State<ProductDetail> {
+  static const platform = MethodChannel('samples.flutter.dev/battery');
+
   int amount = 1;
+  // Get battery level.
+  String _batteryLevel = 'Unknown battery level.';
+
+  Future<void> _getBatteryLevel() async {
+    String batteryLevel;
+    try {
+      final int result = await platform.invokeMethod('getBatteryLevel');
+      batteryLevel = 'Battery level at $result % .';
+    } on PlatformException catch (e) {
+      batteryLevel = "Failed to get battery level: '${e.message}'.";
+    }
+
+    setState(() {
+      _batteryLevel = batteryLevel;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -205,14 +225,17 @@ class _ProductDetailState extends State<ProductDetail> {
             padding: const EdgeInsets.only(top: 8, bottom: 8),
             child: ElevatedButton(
               style: FilledButton.styleFrom(
-                backgroundColor: Color(0xFF3F3A3A),
+                backgroundColor: const Color(0xFF3F3A3A),
                 elevation: 2,
-                minimumSize: Size(double.infinity, 60),
-                shape: RoundedRectangleBorder(),
+                minimumSize: const Size(double.infinity, 60),
+                shape: const RoundedRectangleBorder(),
               ),
-              onPressed: () {},
-              child: const Text(
-                '請選擇尺寸',
+              onPressed: () {
+                print('send platform channel');
+                _getBatteryLevel();
+              },
+              child: Text(
+                _batteryLevel,
                 style: TextStyle(fontSize: 20),
               ),
             ),
