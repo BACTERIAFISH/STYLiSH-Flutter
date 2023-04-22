@@ -42,6 +42,8 @@ class _ProductDetailState extends State<ProductDetail> {
     String testString;
     try {
       testString = await platformTest.invokeMethod('getTestString');
+      final String testString2 = await platformTest.invokeMethod('getTestString2');
+      testString += ' $testString2';
     } on PlatformException catch (e) {
       testString = e.message ?? '';
     }
@@ -248,7 +250,6 @@ class _ProductDetailState extends State<ProductDetail> {
               onPressed: () {
                 print('send platform channel');
                 _getTestString();
-                // _getBatteryLevel();
               },
               child: Text(
                 _testString,

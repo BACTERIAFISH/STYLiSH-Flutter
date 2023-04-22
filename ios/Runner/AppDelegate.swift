@@ -28,6 +28,9 @@ import Flutter
             if call.method == "getTestString" {
                 result("Test String")
             }
+            if call.method == "getTestString2" {
+                result("2")
+            }
         }
         
         GeneratedPluginRegistrant.register(with: self)
