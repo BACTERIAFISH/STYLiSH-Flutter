@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../service/product_provider.dart';
 import '../widgets/product_list.dart';
+import '../pages/map_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required ProductRepository productRepository})
@@ -33,6 +34,22 @@ class _HomePageState extends State<HomePage> {
             'assets/stylish_logo.png',
             width: 128,
           ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return const MapPage();
+                  }),
+                );
+              },
+              icon: const Icon(
+                Icons.map,
+                color: Colors.grey,
+              ),
+            )
+          ],
           backgroundColor: const Color(0xFFEEEEEE),
           elevation: 1,
         ),
