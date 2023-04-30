@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../widgets/product_detail.dart';
 import '../widgets/product_description.dart';
 import '../models/product_model.dart';
+import '../pages/pay_page.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({
@@ -26,9 +27,24 @@ class _DetailPageState extends State<DetailPage> {
           'assets/stylish_logo.png',
           width: 128,
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return const PayPage();
+                }),
+              );
+            },
+            icon: const Icon(
+              Icons.payment,
+              color: Colors.grey,
+            ),
+          ),
+        ],
         backgroundColor: const Color(0xFFEEEEEE),
         elevation: 1,
-        automaticallyImplyLeading: false,
       ),
       body: ListView.builder(
         itemCount: 1,

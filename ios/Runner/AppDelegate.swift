@@ -1,6 +1,7 @@
 import UIKit
 import Flutter
 import GoogleMaps
+import TPDirect
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
@@ -10,6 +11,8 @@ import GoogleMaps
     ) -> Bool {
 
         GMSServices.provideAPIKey("AIzaSyCmVvg9BQ2Brst4zU_VNmPEqcbyEkIFCeA")
+        
+        TPDSetup.setWithAppId(12348, withAppKey: "app_pa1pQcKoY22IlnSXq5m5WP5jFKzoRG58VEXpT7wU62ud7mMbDOGzCYIlzzLF", with: .sandBox)
         
         let controller: FlutterViewController = window?.rootViewController as! FlutterViewController
         
@@ -33,6 +36,16 @@ import GoogleMaps
             }
             if call.method == "getTestString2" {
                 result("2")
+            }
+        }
+        
+        let tappayChannel = FlutterMethodChannel(name: "stylish/tappay", binaryMessenger: controller.binaryMessenger)
+        tappayChannel.setMethodCallHandler { call, result in
+            switch call.method {
+            case "getPrime":
+                result("Test Prime Get!")
+            default:
+                return
             }
         }
         

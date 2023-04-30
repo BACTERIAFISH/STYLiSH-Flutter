@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                 Icons.map,
                 color: Colors.grey,
               ),
-            )
+            ),
           ],
           backgroundColor: const Color(0xFFEEEEEE),
           elevation: 1,
