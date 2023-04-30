@@ -20,7 +20,7 @@ import TPDirect
             name: "samples.flutter.dev/battery",
             binaryMessenger: controller.binaryMessenger
         )
-        batteryChannel.setMethodCallHandler({ [weak self] (call: FlutterMethodCall,  result: @escaping FlutterResult) -> Void in
+        batteryChannel.setMethodCallHandler({ [weak self] (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
             // This method is invoked on the UI thread.
             guard call.method == "getBatteryLevel" else {
                 result(FlutterMethodNotImplemented)
@@ -40,17 +40,52 @@ import TPDirect
         }
         
         let tappayChannel = FlutterMethodChannel(name: "stylish/tappay", binaryMessenger: controller.binaryMessenger)
-        tappayChannel.setMethodCallHandler { call, result in
+        tappayChannel.setMethodCallHandler { [weak self] (call, result) in
             switch call.method {
             case "getPrime":
-                result("Test Prime Get!")
+                self?.getPrime(call: call, result: result)
             default:
+                result("method unknown")
                 return
             }
         }
         
         GeneratedPluginRegistrant.register(with: self)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+    }
+    
+    private func getPrime(call: FlutterMethodCall, result: @escaping FlutterResult) {
+        guard let arguments = call.arguments as? [String: Any] else {
+            result("[Failure] arguments parse failure")
+            return
+        }
+        guard let number = arguments["number"] as? String else {
+            result("[Failure] number parse failure")
+            return
+        }
+        guard let dueMonth = arguments["dueMonth"] as? String else {
+            result("[Failure] dueMonth parse failure")
+            return
+        }
+        guard let dueYear = arguments["dueYear"] as? String else {
+            result("[Failure] dueYear parse failure")
+            return
+        }
+        guard let ccv = arguments["ccv"] as? String else {
+            result("[Failure] ccv parse failure")
+            return
+        }
+        
+        TPDCard
+            .setWithCardNumber(number, withDueMonth: dueMonth, withDueYear: dueYear, withCCV: ccv)
+            .onSuccessCallback { prime, cardInfo, cardIdentifier, merchantReferenceInfo in
+                result(prime)
+            }
+            .onFailureCallback { status, message in
+                
+                result("[Failure] status: \(status), message: \(message)")
+            }
+            .createToken(withGeoLocation: "UNKNOWN")
     }
     
     private func receiveBatteryLevel(result: FlutterResult) {

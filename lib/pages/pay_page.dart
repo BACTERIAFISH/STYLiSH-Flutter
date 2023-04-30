@@ -24,11 +24,7 @@ class _PayPageState extends State<PayPage> {
   final _cardCcvKey = GlobalKey<FormFieldState>();
 
   bool _isButtonEnabled = false;
-
-  void _onCardNumberChanged(String? value) {
-    print(_cardNumberKey.currentState?.isValid);
-    print(_cardNumberKey.currentState?.value);
-  }
+  String _result = '';
 
   void _validateCardInformation() {
     bool isButtonEnabled = ((_cardNumberKey.currentState?.isValid ?? false) &&
@@ -42,17 +38,23 @@ class _PayPageState extends State<PayPage> {
   }
 
   Future<void> _getPrime() async {
-    String testString;
+    Map<String, dynamic> card = {
+      'number': _cardNumberKey.currentState?.value ?? '',
+      'dueMonth': _cardDueMonthKey.currentState?.value ?? '',
+      'dueYear': _cardDueYearKey.currentState?.value ?? '',
+      'ccv': _cardCcvKey.currentState?.value ?? '',
+    };
+
+    String result;
     try {
-      testString = await platform.invokeMethod('getPrime');
+      result = await platform.invokeMethod('getPrime', card);
     } on PlatformException catch (e) {
-      testString = e.message ?? '';
+      result = e.message ?? '';
     }
 
-    print(testString);
-    // setState(() {
-    //   _testString = testString;
-    // });
+    setState(() {
+      _result = result;
+    });
   }
 
   @override
@@ -69,6 +71,7 @@ class _PayPageState extends State<PayPage> {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFormField(
               key: _cardNumberKey,
@@ -89,11 +92,11 @@ class _PayPageState extends State<PayPage> {
                 if (value == null || value == '') {
                   return 'Please enter card number';
                 }
-      
+
                 if (value.length != 16) {
                   return 'Card number length is 16';
                 }
-      
+
                 return null;
               },
               autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -117,11 +120,11 @@ class _PayPageState extends State<PayPage> {
                 if (value == null || value == '') {
                   return 'Please enter due month';
                 }
-      
+
                 if (value.length != 2) {
                   return 'Card due month length is 2';
                 }
-      
+
                 return null;
               },
               autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -145,11 +148,11 @@ class _PayPageState extends State<PayPage> {
                 if (value == null || value == '') {
                   return 'Please enter due year';
                 }
-      
+
                 if (value.length != 2) {
                   return 'Card due month length is 2';
                 }
-      
+
                 return null;
               },
               autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -173,11 +176,11 @@ class _PayPageState extends State<PayPage> {
                 if (value == null || value == '') {
                   return 'Please enter ccv number';
                 }
-      
+
                 if (value.length != 3) {
                   return 'Card due month length is 3';
                 }
-      
+
                 return null;
               },
               autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -192,16 +195,17 @@ class _PayPageState extends State<PayPage> {
                   shape: const RoundedRectangleBorder(),
                 ),
                 onPressed: _isButtonEnabled
-                    ? () {
-                        print('send platform channel');
-                        _getPrime();
-                      }
+                    ? _getPrime
                     : null,
                 child: const Text(
                   'Get Prime',
                   style: TextStyle(fontSize: 20),
                 ),
               ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 16),
+              child: Text(_result),
             ),
           ],
         ),
