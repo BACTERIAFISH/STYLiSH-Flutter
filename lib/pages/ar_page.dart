@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:arkit_plugin/arkit_plugin.dart';
-import 'package:vector_math/vector_math_64.dart';
+import 'ar_default_page.dart';
 
 class ARPage extends StatefulWidget {
   const ARPage({super.key});
@@ -10,13 +9,9 @@ class ARPage extends StatefulWidget {
 }
 
 class _ARPageState extends State<ARPage> {
-  late ARKitController arkitController;
-
-  @override
-  void dispose() {
-    arkitController.dispose();
-    super.dispose();
-  }
+  List<String> titles = [
+    'Default',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +19,48 @@ class _ARPageState extends State<ARPage> {
       appBar: AppBar(
         title: const Text('ARKit'),
       ),
-      body: ARKitSceneView(onARKitViewCreated: onARKitViewCreated),
-    );
-  }
+      body: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: titles.length,
+        itemBuilder: (conext, index) {
+          String title = titles[index];
 
-  void onARKitViewCreated(ARKitController arkitController) {
-    this.arkitController = arkitController;
-    final node = ARKitNode(
-      geometry: ARKitSphere(radius: 0.1),
-      position: Vector3(0, 0, -0.5),
+          return Container(
+            alignment: Alignment.center,
+            child: SizedBox(
+              width: 200,
+              height: 44,
+              child: ElevatedButton(
+                style: const ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll<Color>(
+                    Color(0xFF3F3A3A),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      switch (title) {
+                        case 'Default':
+                          return const ARDefaultPage();
+                        default:
+                          return const ARDefaultPage();
+                      }
+                    }),
+                  );
+                },
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
     );
-    this.arkitController.add(node);
   }
 }
