@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stylish/pages/ar_page.dart';
 
 import '../service/product_provider.dart';
 import '../widgets/product_list.dart';
@@ -52,6 +53,19 @@ class _HomePageState extends State<HomePage> {
           ],
           backgroundColor: const Color(0xFFEEEEEE),
           elevation: 1,
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.grey,
+          onPressed: () {
+            print('present AR');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) {
+                return const ARPage();
+              }),
+            );
+          },
+          child: const Icon(Icons.view_in_ar),
         ),
         body: SafeArea(
           child: Column(
