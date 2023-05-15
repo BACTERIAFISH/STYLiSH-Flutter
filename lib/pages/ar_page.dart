@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stylish/pages/ar_earth_page.dart';
 import 'ar_default_page.dart';
 
 class ARPage extends StatefulWidget {
@@ -11,6 +12,7 @@ class ARPage extends StatefulWidget {
 class _ARPageState extends State<ARPage> {
   List<String> titles = [
     'Default',
+    'Earth',
   ];
 
   @override
@@ -27,6 +29,7 @@ class _ARPageState extends State<ARPage> {
 
           return Container(
             alignment: Alignment.center,
+            margin: const EdgeInsets.only(top: 16),
             child: SizedBox(
               width: 200,
               height: 44,
@@ -43,6 +46,8 @@ class _ARPageState extends State<ARPage> {
                       switch (title) {
                         case 'Default':
                           return const ARDefaultPage();
+                        case 'Earth':
+                          return const AREarthPage();
                         default:
                           return const ARDefaultPage();
                       }

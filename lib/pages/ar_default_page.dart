@@ -35,8 +35,8 @@ class _ARDefaultPageState extends State<ARDefaultPage> {
   void onARKitViewCreated(ARKitController arkitController) {
     this.arkitController = arkitController;
     final node = ARKitNode(
-      geometry: ARKitSphere(radius: 0.1),
-      position: Vector3(0, 0, -0.5),
+      geometry: ARKitSphere(radius: 0.15),
+      position: Vector3(0, 0, -1),
     );
     this.arkitController.add(node);
   }
